@@ -1,29 +1,4 @@
-const express = require("express");
-const CategoryModel = require("../../Models/Category/Category");
-const CategoryRouter = express.Router();
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
-const { sendResponse } = require("../../Helper/helper");
-const uploadFile = require("../../Helper/Firebase/FirebaseBuket");
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const uploadPath = path.join(__dirname, '../../uploads/');
-        // Check if the directory exists, create it if not
-        if (!fs.existsSync(uploadPath)) {
-            fs.mkdirSync(uploadPath, { recursive: true });
-        }
-        cb(null, uploadPath);
-    },
-    filename: function (req, file, cb) {
-        cb(null, `${new Date().getTime()}-${file.originalname}`);
-    }
-});
-
-CategoryRouter.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
-
-const upload = multer({ storage: storage });
 
 CategoryRouter.get("/getCategory/all", async (req, res) => {
     try {
