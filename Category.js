@@ -15,7 +15,7 @@ CategoryRouter.get("/getCategory/all", async (req, res) => {
 })
 
 
-CategoryRouter.get("/getCategory/search", async (req, res) => {
+CategoryRouter.post("/getCategory/search", async (req, res) => {
     try {
         let q = req.query.q || 0 // skip
         let pageLimt = req.query.pageLimt || 10 // limit 
